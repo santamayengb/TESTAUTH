@@ -2,6 +2,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../home_page/home_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,8 +19,9 @@ class NamingRestaurantWidget extends StatefulWidget {
 }
 
 class _NamingRestaurantWidgetState extends State<NamingRestaurantWidget> {
-  TextEditingController nameFieldController;
+  LatLng currentUserLocationValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  TextEditingController nameFieldController;
 
   @override
   void initState() {
@@ -115,8 +117,18 @@ class _NamingRestaurantWidgetState extends State<NamingRestaurantWidget> {
                         ),
                       ),
                       FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          currentUserLocationValue =
+                              await getCurrentUserLocation(
+                                  defaultLocation: LatLng(0.0, 0.0));
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePageWidget(
+                                restaurantName: currentUserLocationValue,
+                              ),
+                            ),
+                          );
                         },
                         text: 'submit',
                         options: FFButtonOptions(

@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/lat_lng.dart';
 import '../phoneauth/phoneauth_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +13,7 @@ class HomePageWidget extends StatefulWidget {
     this.restaurantName,
   }) : super(key: key);
 
-  final bool restaurantName;
+  final LatLng restaurantName;
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();

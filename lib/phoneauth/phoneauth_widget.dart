@@ -48,89 +48,96 @@ class _PhoneauthWidgetState extends State<PhoneauthWidget> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: phonefieldController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          hintText: 'number',
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                    height: 200,
+                    decoration: BoxDecoration(),
+                  ),
+                  Container(
+                    height: 200,
+                    constraints: BoxConstraints(
+                      maxHeight: 50,
+                    ),
+                    decoration: BoxDecoration(),
+                    child: TextFormField(
+                      controller: phonefieldController,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        hintText: 'number',
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0x00000000),
+                            width: 1,
                           ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(4.0),
+                            topRight: Radius.circular(4.0),
                           ),
                         ),
-                        style: FlutterFlowTheme.bodyText1,
-                        keyboardType: TextInputType.phone,
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0x00000000),
+                            width: 1,
+                          ),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(4.0),
+                            topRight: Radius.circular(4.0),
+                          ),
+                        ),
+                        filled: true,
                       ),
+                      style: FlutterFlowTheme.bodyText1,
+                      keyboardType: TextInputType.phone,
                     ),
-                    FFButtonWidget(
-                      onPressed: () async {
-                        if (phonefieldController.text.isEmpty ||
-                            !phonefieldController.text.startsWith('+')) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                  'Phone Number is required and has to start with +.'),
-                            ),
-                          );
-                          return;
-                        }
-                        await beginPhoneAuth(
-                          context: context,
-                          phoneNumber: phonefieldController.text,
-                          onCodeSent: () async {
-                            await Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => OtpverifyWidget(),
-                              ),
-                              (r) => false,
-                            );
-                          },
+                  ),
+                  FFButtonWidget(
+                    onPressed: () async {
+                      if (phonefieldController.text.isEmpty ||
+                          !phonefieldController.text.startsWith('+')) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                'Phone Number is required and has to start with +.'),
+                          ),
                         );
-                      },
-                      text: 'send',
-                      options: FFButtonOptions(
-                        width: 130,
-                        height: 40,
-                        color: FlutterFlowTheme.primaryColor,
-                        textStyle: FlutterFlowTheme.subtitle2.override(
-                          fontFamily: 'Poppins',
-                          color: Colors.white,
-                        ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: 12,
+                        return;
+                      }
+                      await beginPhoneAuth(
+                        context: context,
+                        phoneNumber: phonefieldController.text,
+                        onCodeSent: () async {
+                          await Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OtpverifyWidget(),
+                            ),
+                            (r) => false,
+                          );
+                        },
+                      );
+                    },
+                    text: 'send',
+                    options: FFButtonOptions(
+                      width: 130,
+                      height: 40,
+                      color: FlutterFlowTheme.primaryColor,
+                      textStyle: FlutterFlowTheme.subtitle2.override(
+                        fontFamily: 'Poppins',
+                        color: Colors.white,
                       ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: 12,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
