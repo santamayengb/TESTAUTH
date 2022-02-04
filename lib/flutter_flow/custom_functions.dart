@@ -9,6 +9,6 @@ import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
-String nameFunc(String name) {
-  return name;
+String nameFunc(bool name) {
+  if (name == true) return name.toString();
 }

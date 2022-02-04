@@ -1,20 +1,18 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NamingRestaurantWidget extends StatefulWidget {
   const NamingRestaurantWidget({
     Key key,
-    this.restaurantName,
+    this.isField,
   }) : super(key: key);
 
-  final String restaurantName;
+  final bool isField;
 
   @override
   _NamingRestaurantWidgetState createState() => _NamingRestaurantWidgetState();
@@ -119,22 +117,13 @@ class _NamingRestaurantWidgetState extends State<NamingRestaurantWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          final restaurantCreateData =
-                              createRestaurantRecordData(
-                            restaurantName: nameFieldController.text,
-                          );
-                          await RestaurantRecord.collection
-                              .doc()
-                              .set(restaurantCreateData);
-                          await Navigator.pushAndRemoveUntil(
+                          await Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => HomePageWidget(
-                                restaurantName: namingRestaurantRestaurantRecord
-                                    .restaurantName,
+                                restaurantName: widget.isField,
                               ),
                             ),
-                            (r) => false,
                           );
                         },
                         text: 'submit',
