@@ -2,7 +2,6 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../home_page/home_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -116,15 +115,8 @@ class _NamingRestaurantWidgetState extends State<NamingRestaurantWidget> {
                         ),
                       ),
                       FFButtonWidget(
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePageWidget(
-                                restaurantName: widget.isField,
-                              ),
-                            ),
-                          );
+                        onPressed: () {
+                          print('Button pressed ...');
                         },
                         text: 'submit',
                         options: FFButtonOptions(
