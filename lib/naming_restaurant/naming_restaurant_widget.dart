@@ -2,7 +2,6 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/lat_lng.dart';
 import '../home_page/home_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,25 +9,18 @@ import 'package:google_fonts/google_fonts.dart';
 class NamingRestaurantWidget extends StatefulWidget {
   const NamingRestaurantWidget({
     Key key,
-    this.latlong,
+    this.restaurantName,
   }) : super(key: key);
 
-  final LatLng latlong;
+  final String restaurantName;
 
   @override
   _NamingRestaurantWidgetState createState() => _NamingRestaurantWidgetState();
 }
 
 class _NamingRestaurantWidgetState extends State<NamingRestaurantWidget> {
-  LatLng currentUserLocationValue;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController nameFieldController;
-
-  @override
-  void initState() {
-    super.initState();
-    nameFieldController = TextEditingController();
-  }
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +81,11 @@ class _NamingRestaurantWidgetState extends State<NamingRestaurantWidget> {
                     children: [
                       Expanded(
                         child: TextFormField(
-                          controller: nameFieldController,
+                          controller: nameFieldController ??=
+                              TextEditingController(
+                            text:
+                                namingRestaurantRestaurantRecord.restaurantName,
+                          ),
                           obscureText: false,
                           decoration: InputDecoration(
                             hintText: 'Restaurant Name',
@@ -119,14 +115,12 @@ class _NamingRestaurantWidgetState extends State<NamingRestaurantWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          currentUserLocationValue =
-                              await getCurrentUserLocation(
-                                  defaultLocation: LatLng(0.0, 0.0));
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => HomePageWidget(
-                                restaurantName: currentUserLocationValue,
+                                restaurantName: namingRestaurantRestaurantRecord
+                                    .restaurantName,
                               ),
                             ),
                           );

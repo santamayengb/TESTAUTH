@@ -1,10 +1,9 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/rest_name_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/lat_lng.dart';
 import '../phoneauth/phoneauth_widget.dart';
-import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,7 +13,7 @@ class HomePageWidget extends StatefulWidget {
     this.restaurantName,
   }) : super(key: key);
 
-  final LatLng restaurantName;
+  final String restaurantName;
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -100,13 +99,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        functions.nameFunc(widget.restaurantName),
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                          fontSize: 30,
-                        ),
-                      ),
+                      RestNameWidget(),
                     ],
                   ),
                 ],
